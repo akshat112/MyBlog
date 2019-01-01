@@ -21,7 +21,7 @@ app.use(methodOverride("_method"));
 app.set("view engine","ejs");
 
 
-mongoose.connect("mongodb://Aadish09:@ds243254.mlab.com:43254/myblog",{ useNewUrlParser: true});
+mongoose.connect("mongodb://Aadish09:qwerty1234@ds243254.mlab.com:43254/myblog",{ useNewUrlParser: true});
 app.use(require("express-session")({
     secret:"This is Aadish's blog",
     resave:false,
