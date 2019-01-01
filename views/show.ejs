@@ -1,0 +1,59 @@
+<% include ./partials/header%>
+
+<div class=" container">
+  <div class="row">
+    <div class="container col-md-8">
+          <div class="ui huge header center aligned header"><%= blog.title%></div>
+          <div class="ui divider"></div>
+          <img class= "ui fluid rounded image"src="<%=blog.image%>">
+          <div class="ui divider"></div>
+          <div class="blog-body">
+          
+          
+          <span ><b>Posted by :</b> <%=blog.author.username%><div class="date"><%- moment(blog.created).fromNow()%></div></span>
+          <div class="ui divider"></div>
+          <p><%=blog.body%></p>
+          <% if(currentUser && blog.author.id.equals(currentUser._id)){%>
+          <a class="ui green basic button" href="/blogs/<%=blog._id%>/edit">EDIT POST</a>
+          <form id ="delete" action="/blogs/<%=blog._id%>?_method=DELETE" method="POST">
+          <button  class="ui red basic button">Delete</button>
+          </form>
+          <% }%>
+          </div>
+    </div>
+   <!-------------------------------- -->
+    <div class=" container col-md-4">
+          <div class="ui header">Comments</div>
+          <form class="ui form" action="/blogs/<%=blog._id%>" method="POST">
+             <div class="field">
+                <label>Add Comment</label>
+                <input type="text" name="comments[text]">
+             </div>
+             <input class="positive ui button" type="submit"> 
+          </form>
+    <!---------------------------------------------->
+               
+               
+               <% blog.comments.forEach(function(comment){%>
+                   <div class="well">  
+                     <div class="date"><span><%= moment(comment.created).fromNow() %></span></div>
+                     <strong><%= comment.author.username%> : </strong><%=comment.text%>
+                     <div>
+                     <a class="edit" href="/blogs/<%=blog._id%>/comments/<%=comment._id%>/edit" >Edit</a>
+                     <form id ="delete">
+                      
+                        <a  class="delete">Delete</a>
+                     </form>
+                     </div>
+                      </div>
+                  <br>
+          <%  })%>
+         
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<% include ./partials/footer%>

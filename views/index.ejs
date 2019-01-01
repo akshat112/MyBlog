@@ -1,0 +1,22 @@
+<% include ./partials/header%>
+<div class="container">
+<div class="row">
+<% blogs.forEach(function(blog){ %>
+    <div class="container col-md-5 inner">
+        
+    <h1 class="ui header text centered"><%=blog.title%></h1>
+    <hr>
+    <img class="ui medium centered rounded image" src="<%=blog.image%>">
+    <hr>
+    <span ><b>Posted by :</b> <%=blog.author.username%><strong class="date"><%- moment(blog.created).fromNow()%> </strong></span>
+    <hr>
+    <p><%-blog.body.substring(0,100)%> ...</p>
+    
+    <a class ="ui basic violet button "href="/blogs/<%=blog._id%>">Read more >></a>
+   
+    </div>
+
+<% } );%>
+</div>
+</div>
+<% include ./partials/footer%>
